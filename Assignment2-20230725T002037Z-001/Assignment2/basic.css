@@ -1,0 +1,58 @@
+/* 
+  CSE183 Assignment 2
+
+  CSS for Basic Requirement 
+*/
+.flex-container{
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+}
+.flex-item{
+	background-color: rgb(100%,100%, 0%);
+	width: 60px;
+	height: 60px;
+	font-family: "Courier", "Lucida", Console;
+	font-size: 40px;
+	text-align: center;
+}
+.flex-item1{
+	background-color: rgb(100%,100%, 0%);
+	width: 60px;
+	height: 60px;
+	font-family: "Courier", "Lucida", Console;
+	font-size: 40px;
+	text-align: center;
+}
+.flex-item2{
+	background-color: rgb(100%,100%, 0%);
+	width: 60px;
+	height: 60px;
+	font-family: "Courier", "Lucida", Console;
+	font-size: 40px;
+	text-align: center;
+}
+.flex-item3{
+	background-color: rgb(100%,100%, 0%);
+	width: 60px;
+	height: 60px;
+	font-family: "Courier", "Lucida", Console;
+	font-size: 40px;
+	text-align: center;
+}
+.flex-item4{
+	background-color: rgb(100%,100%, 0%);
+	width: 60px;
+	height: 60px;
+	font-family: "Courier", "Lucida", Console;
+	font-size: 40px;
+	text-align: center;
+}
+.flex-item5{
+	background-color: rgb(100%,100%, 0%);
+	width: 60px;
+	height: 60px;
+	font-family: "Courier", "Lucida", Console;
+	font-size: 40px;
+	text-align: center;
+}
