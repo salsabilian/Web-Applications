@@ -1,0 +1,173 @@
+#
+# CSE183 Assignment 7
+#
+
+openapi: '3.0.3'
+
+info:
+  description: CSE183 Assignment 7
+  version: 0.1.0
+  title: CSE183 Assignment 7
+
+servers:
+  - url: http://localhost:3010
+
+paths:
+  /v0/mail:
+    get:
+      parameters:
+      - name: mailbox
+        in: query
+        schema:
+           type: string
+        required: false
+      description: Returns all Email
+      responses:
+        200:
+          description: Email Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailResponse'
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: Creates a new Email
+      requestBody:
+        description: Application to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email'
+      responses:
+        201:
+          description: Application response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+        400:
+          description: Invalid id
+        409:
+          description: Conflict. Requested Id in use.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v0/mail/{id}:
+    get:
+      description: Returns a single email
+      parameters:
+        - name: id
+          in: path
+          description: id of the email
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Email found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+        400:
+          description: Invalid Id
+        404:
+          description: Email not found
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: moves a single email to a new mailbox
+      parameters:
+        - name: id
+          in: path
+          description: id of the email
+          required: true
+          schema:
+            type: string
+        - name: mailbox
+          in: query
+          required: true
+          schema:
+           type: string
+           description: tells us what email to go to
+      responses:
+        204:
+          description: Email moved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+        400:
+          description: Invalid Id
+        404:
+          description: Email not found
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+
+    EmailResponse:
+      type: array
+      properties:
+        mails: 
+          type: object
+          items:
+            $ref: '#/components/schemas/Email'
+    Email:
+       type: object
+       properties:
+        id:
+          type: string
+          format: uuid
+        to-name:
+          type: string
+        to-email:
+          type: string
+          format: email
+        from-name:
+          type: string
+        from-email:
+          type: string
+          format: email
+        subject:
+          type: string
+        received:
+          type: string
+          format: date-time
+        content:
+          type: string
+       required:
+         - to-name 
+         - to-email 
+         - subject
+         - received
+         - content
+
